@@ -29,6 +29,10 @@ const constraints = {
     }
 }
 
+router.get("/:id/posts", (req, res) => {
+
+});
+
 router.get("/", (req, res) =>{
     db.user.findAll().then((result)=>{
         res.send(result);

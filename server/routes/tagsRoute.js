@@ -1,6 +1,10 @@
 const router = require("express").Router();
 db = require("../models");
 
+router.get("/:id/posts", (req, res) => {
+
+});
+
 router.get("/", (req, res) =>{
     db.tag.findAll().then((result)=>{
         res.send(result);

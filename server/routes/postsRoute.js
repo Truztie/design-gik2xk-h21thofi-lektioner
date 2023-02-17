@@ -1,6 +1,20 @@
 const router = require("express").Router();
-db = require("../models");
 const postService = require("../services/postService");
+
+router.post("/:id/addComment", (req, res) => {
+    const comment = req.body
+    const id = req.params.id;
+    postService.addComment(id, comment).then((result) =>{
+        res.status(result.status).json(result.data);
+    });
+});
+
+router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    postService.getById(id).then((result) =>{
+        res.status(result.status).json(result.data);
+    });
+})
 
 router.get("/", (req, res) =>{
     postService.getAll().then((result) =>{
