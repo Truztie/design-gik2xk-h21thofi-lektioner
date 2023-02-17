@@ -64,6 +64,8 @@ async function create(post){
     } else{
         try{
             const newPost = await db.post.create(post);
+
+        
             return createResponseSuccess(newPost);
         } catch (error) {
             return createResponseError(error.status, error.message);
@@ -146,4 +148,7 @@ function _formatPost(post){
     }
 }
 
+async function _findOrCreatTagId(){
+    
+}
 module.exports = {getById, getAll, addComment, create, update, destroy};
