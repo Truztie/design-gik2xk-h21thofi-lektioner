@@ -1,3 +1,3 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define("postTag", {}, {underscored: true});
+  return sequelize.define('postTag', {}, { underscored: true });
 };

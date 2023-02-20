@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "designlektioner",
     "host": "127.0.0.1",
     "dialect": "mariadb",
@@ -19,6 +19,7 @@
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   }
 }
