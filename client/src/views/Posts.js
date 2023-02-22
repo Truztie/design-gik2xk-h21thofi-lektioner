@@ -1,5 +1,11 @@
+import { useParams } from "react-router-dom";
+import PostList from "../components/PostList";
+
 function Posts() {
-    return <h2>Posts</h2>;
+    const params = useParams;
+    return (
+        <PostList />
+    );
 }
 
 export default Posts;
