@@ -1,42 +1,43 @@
-import PostItemLarge from "../components/PostItemLarge";
-import { Button } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Button } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import CommentForm from '../components/CommentForm';
+
+import PostItemLarge from '../components/PostItemLarge';
+import { addComment, getOne } from '../models/PostModel';
 
 function PostDetail() {
-    const post = {
-        "id": 11,
-        "title": "Lol",
-        "body": "wtf is happening lol!",
-        "imageUrl": null,
-        "createdAt": "2023-02-20T08:07:32.000Z",
-        "updatedAt": "2023-02-20T08:07:32.000Z",
-        "author": {
-            "id": 4,
-            "username": "thomas",
-            "email": "thomasfinneman94@gmail.com",
-            "firstName": null,
-            "lastName": null,
-            "imageUrl": null
-        },
-        "tags": ["tagg1", "tagg2"],
-        "comments": [
-            {
-                "title": "WTF",
-                "body": "yeah wtf lol!",
-                "author": "thomas",
-                "createdAt": "2023-02-20T08:29:59.000Z"
-            }
-        ]
-    };
-    const params = useParams();
-    console.log(params)
-    return(
-        <>
-            <PostItemLarge post={post}/>
-            <Button variant="contained" color="primary">Edit</Button>
-            <Button variant="contained" color="primary">Delete</Button>
-        </>
-    );
+  const params = useParams();
+  const postId = params.id;
+
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    getOne(postId).then((post) => setPost(post));
+  }, [postId]);
+
+  function onCommentAdd(comment) {
+    addComment(postId, comment).then((post) => setPost(post));
+  }
+
+  return (
+    <>
+      <PostItemLarge post={post} />
+      <CommentForm onSave={onCommentAdd}></CommentForm>
+      <div>
+        {post.comments &&
+          post.comments.map((comment, i) => (
+            <p key={`comment_${i}`}>
+              {comment.title}
+              <br /> {comment.body}
+            </p>
+          ))}
+      </div>
+      <Link to={`/posts/${postId}/edit`}>
+        <Button variant="filled">Ändra</Button>
+      </Link>
+    </>
+  );
 }
 
 export default PostDetail;

@@ -1,10 +1,10 @@
 import './App.css';
-import {Box, AppBar, Toolbar, Typography} from "@mui/material";
-import {Routes, Route, Link} from "react-router-dom";
+import { Typography, Box, AppBar, Toolbar } from '@mui/material';
+import { Routes, Route, Link } from 'react-router-dom';
 import Home from './views/Home';
 import Posts from './views/Posts';
-import PostDetail from './views/PostDetail';
 import PostEdit from './views/PostEdit';
+import PostDetail from './views/PostDetail';
 
 function App() {
   return (
@@ -15,28 +15,43 @@ function App() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link to="/">Home</Link>
+              <Link to="/">Hem</Link>
             </Typography>
             <Typography variant="h6" component="div">
-            <Link to="/posts">All Posts</Link>
+              <Link to="/posts">Alla inlägg</Link>
             </Typography>
             <Typography variant="h6" component="div">
-            <Link to="/posts/new">Create Post</Link>
+              <Link to="/posts/new">Skapa inlägg</Link>
             </Typography>
           </Toolbar>
-          </AppBar>
-        </Box>
-        <div>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/posts" element={<Posts />} />
-            <Route exact path="/users/:id/posts" element={<Posts />} />
-            <Route exact path="/tags/:name/posts" element={<Posts />} />
-            <Route exact path="/posts/new" element={<PostEdit />} />
-            <Route exact path="/posts/:id/edit" element={<PostEdit />} />
-            <Route exact path="/posts/:id" element={<PostDetail />} />
-          </Routes>
-        </div>
+        </AppBar>
+      </Box>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Home></Home>}></Route>
+          <Route exact path="/posts" element={<Posts></Posts>}></Route>
+          <Route
+            exact
+            path="/users/:id/posts"
+            element={<Posts></Posts>}></Route>
+          <Route
+            exact
+            path="/tags/:name/posts"
+            element={<Posts></Posts>}></Route>
+          <Route
+            exact
+            path="/posts/new"
+            element={<PostEdit></PostEdit>}></Route>
+          <Route
+            exact
+            path="/posts/:id/edit"
+            element={<PostEdit></PostEdit>}></Route>
+          <Route
+            exact
+            path="/posts/:id"
+            element={<PostDetail></PostDetail>}></Route>
+        </Routes>
+      </div>
     </div>
   );
 }

@@ -17,11 +17,11 @@ const constraints = {
   }
 };
 
-async function getByTag(tagId) {
+async function getByTag(name) {
   try {
-    const tag = await db.tag.findOne({ where: { id: tagId } });
+    const tag = await db.tag.findOne({ where: { name } });
     const allPosts = await tag.getPosts({ include: [db.user, db.tag] });
-    /* Om allt blev bra, returnera allPosts */
+
     return createResponseSuccess(allPosts.map((post) => _formatPost(post)));
   } catch (error) {
     return createResponseError(error.status, error.message);
@@ -75,8 +75,21 @@ async function addComment(id, comment) {
   }
   try {
     comment.postId = id;
-    const newComment = await db.comment.create(comment);
-    return createResponseSuccess(newComment);
+    await db.comment.create(comment);
+
+    const postWithNewComment = await db.post.findOne({
+      where: { id },
+      include: [
+        db.user,
+        db.tag,
+        {
+          model: db.comment,
+          include: [db.user]
+        }
+      ]
+    });
+
+    return createResponseSuccess(_formatPost(postWithNewComment));
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -163,6 +176,7 @@ function _formatPost(post) {
           title: comment.title,
           body: comment.body,
           author: comment.user.username,
+          authorImage: comment.user.imageUrl,
           createdAt: comment.createdAt
         },
         ...cleanPost.comments
@@ -186,6 +200,8 @@ async function _findOrCreateTagId(name) {
 }
 
 async function _addTagToPost(post, tags) {
+  await db.postTag.destroy({ where: { postId: post.id } });
+
   if (tags) {
     tags.forEach(async (tag) => {
       const tagId = await _findOrCreateTagId(tag);
