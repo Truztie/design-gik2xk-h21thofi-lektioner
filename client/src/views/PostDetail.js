@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
-import { useParams, useState, useEffect } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
+import { useState, useEffect} from 'react';
 import PostItemLarge from '../components/PostItemLarge';
 import { getOne } from '../models/PostModel';
 
@@ -17,6 +18,12 @@ function PostDetail() {
   return (
     <>
       <PostItemLarge post={post} />
+      <div>
+        {post.comments &&
+          post.comments.map((comment, i) => (
+            <p key={`commentId_${i}`}>{comment.title}</p>
+          ))}
+      </div>
       <Button variant="filled">Ändra</Button>
       <Button variant="filled">Ta bort</Button>
     </>

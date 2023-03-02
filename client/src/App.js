@@ -21,7 +21,7 @@ function App() {
               <Link to="/posts">Alla inlägg</Link>
             </Typography>
             <Typography variant="h6" component="div">
-              <Link to="/postEdit">Skapa inlägg</Link>
+              <Link to="/post/new">Skapa inlägg</Link>
             </Typography>
           </Toolbar>
         </AppBar>

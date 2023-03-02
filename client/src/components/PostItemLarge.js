@@ -19,12 +19,6 @@ function PostItemLarge({ post }) {
         <p>{post.title}</p>
         <p>{post.body}</p>
       </div>
-      <div>
-        {post.comments &&
-          post.comments.map((comment) => (
-            <p key={`commentId_${comment.id}`}>{comment.title}</p>
-          ))}
-      </div>
     </> : <>inlägg saknas</>
   );
 }
