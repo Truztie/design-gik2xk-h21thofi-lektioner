@@ -1,41 +1,34 @@
 import { Button } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import CommentForm from '../components/CommentForm';
-
+import { useParams } from 'react-router-dom';
 import PostItemLarge from '../components/PostItemLarge';
-import { addComment, getOne } from '../models/PostModel';
 
 function PostDetail() {
+  //Ta emot ett id för att hämta ett inlägg posts/:id
+  const post = {
+    id: 2,
+    title: 'Yoshis inlägg',
+    body: 'Hej! Jag är en hund',
+    imageUrl:
+      'https://www.rosssolar.com/wp-content/uploads/2017/08/image-placeholder.jpg',
+    createdAt: '2022-12-27T13:01:49.000Z',
+    updatedAt: '2023-01-03T14:00:03.000Z',
+    author: {
+      id: 1,
+      username: 'mie',
+      email: 'mie@du.se',
+      firstName: null,
+      lastName: null,
+      imageUrl: null
+    },
+    tags: []
+  };
   const params = useParams();
-  const postId = params.id;
-
-  const [post, setPost] = useState({});
-
-  useEffect(() => {
-    getOne(postId).then((post) => setPost(post));
-  }, [postId]);
-
-  function onCommentAdd(comment) {
-    addComment(postId, comment).then((post) => setPost(post));
-  }
-
+  console.log(params);
   return (
     <>
       <PostItemLarge post={post} />
-      <CommentForm onSave={onCommentAdd}></CommentForm>
-      <div>
-        {post.comments &&
-          post.comments.map((comment, i) => (
-            <p key={`comment_${i}`}>
-              {comment.title}
-              <br /> {comment.body}
-            </p>
-          ))}
-      </div>
-      <Link to={`/posts/${postId}/edit`}>
-        <Button variant="filled">Ändra</Button>
-      </Link>
+      <Button variant="filled">Ändra</Button>
+      <Button variant="filled">Ta bort</Button>
     </>
   );
 }

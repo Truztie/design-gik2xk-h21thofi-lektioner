@@ -2,10 +2,10 @@ const router = require('express').Router();
 const db = require('../models');
 const postService = require('../services/postService');
 
-router.get('/:name/posts', (req, res) => {
-  const name = req.params.name;
+router.get('/:id/posts', (req, res) => {
+  const id = req.params.id;
 
-  postService.getByTag(name).then((result) => {
+  postService.getByTag(id).then((result) => {
     res.status(result.status).json(result.data);
   });
 });
