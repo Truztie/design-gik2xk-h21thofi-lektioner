@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PostList from '../components/PostList';
 
 function Posts() {
-  const params = useParams();
-  console.log(params);
-  return <PostList />;
+  const location = useLocation();
+  console.log(location);
+  return <PostList pathname={location.pathname}/>;
 }
 
 export default Posts;

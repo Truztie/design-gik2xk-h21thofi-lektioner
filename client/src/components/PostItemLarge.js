@@ -3,6 +3,7 @@ import UserItemSmall from './UserItemSmall';
 
 function PostItemLarge({ post }) {
   return (
+    post ?
     <>
       <UserItemSmall user={post.author} />
 
@@ -24,7 +25,7 @@ function PostItemLarge({ post }) {
             <p key={`commentId_${comment.id}`}>{comment.title}</p>
           ))}
       </div>
-    </>
+    </> : <>inlägg saknas</>
   );
 }
 
