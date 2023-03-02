@@ -2,9 +2,9 @@
   "development": {
     "username": "root",
     "password": "",
-    "database": "designlektioner",
+    "database": "blog",
     "host": "127.0.0.1",
-    "dialect": "mariadb",
+    "dialect": "mysql",
     "logging": false
   },
   "test": {
