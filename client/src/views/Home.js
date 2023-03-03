@@ -3,28 +3,33 @@ import UserList from '../components/UserList';
 import TagList from '../components/TagList';
 import { Box, Grid, Typography } from '@mui/material';
 import './Home.css';
+import { CustomPaper } from '../components/SmallComponents';
 
 function Home() {
   return (
-    <Grid container columnSpacing={2} p={2} className="Home">
+    <Grid container columnSpacing={8} p={2}>
       <Grid className="Home__grid-item" item xs={12} md={8}>
         <Typography variant="h4" component="h2">
           Alla inlägg
         </Typography>
         <PostList></PostList>
       </Grid>
-      <Grid className="Home__grid-item" item xs={12} md={4}>
-        <Box className="Home__grid-item__content">
+      <Grid item xs={12} md={4}>
+        <Box marginBottom="4rem">
           <Typography variant="h4" component="h2">
             Användare
           </Typography>
-          <UserList></UserList>
+          <CustomPaper>
+            <UserList></UserList>
+          </CustomPaper>
         </Box>
-        <Box className="Home__grid-item__content">
+        <Box>
           <Typography variant="h4" component="h2">
             Taggar
           </Typography>
-          <TagList></TagList>
+          <CustomPaper>
+            <TagList></TagList>
+          </CustomPaper>
         </Box>
       </Grid>
     </Grid>
